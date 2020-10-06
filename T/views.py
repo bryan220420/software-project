@@ -20,7 +20,11 @@ def get_rutas_project(codProject):
   rutas = Ruta.objects.filter(codPyto=codProject)
   return rutas
 
-def get_caja(codCaja):
+def get_caja(codPyto):
+  caja = Caja.objects.filter(codPyto=codPyto)
+  return caja
+
+def get_caja2(codCaja):
   caja = Caja.objects.get(codCaja=codCaja)
   return caja
 
@@ -69,13 +73,13 @@ def rutas_by_project(request, cod_project):
 def flujos(request, cod_project):
   project = get_project(cod_project)
   tipocaja = Tipo.objects.all()   
-  caja = Caja.objects.all(); 
+  caja = get_caja(cod_project); 
   form=CajaForm()
    #Caja
   return render(request, 'prueba_caja.html', {'project': project, 'tipo': tipocaja,'caja':caja , 'form':form})
 
 def flujotipo(request,cod_project,cod_caja,cod_tipo):
-  caja = get_caja(cod_caja)
+  caja = get_caja2(cod_caja)
   ingresos= get_ingresos(cod_caja)
   totalV=0
   totalC=0

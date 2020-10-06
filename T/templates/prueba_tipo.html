@@ -24,7 +24,7 @@
       <nav id="sidebar">
         <div class="sidebar--header" id="sidebar-header">
           <img src={% static 'img/user.png' %} alt="user icon">
-          <p>Quinteros Mauro Danilo</p>
+          <p>Administrador de Proyecto</p>
         </div>
         <ul class="list-unstyled sidebar--list" id="sidebar-list">
           <li>
@@ -91,6 +91,7 @@
               <div class="col-12 col-md-12 p-0 mb-5">
                 <div class="d-flex justify-content-between align-items-center">
                   <h2 class="section--title m-0">.:Caja de Flujos:.</h2>
+                  <a href="/proyecto/flujos/{{project.codPyto}}" class="btn btn-primary btn-bg">Regresar</a>
                 </div>
               </div>
               <div class="col-3 col-md-3 p-0">
@@ -101,10 +102,10 @@
                     <li><i class="far fa-folder-open"></i><span class="caret">{{ project.codPyto }}</span>
                         <ul class="nested">
                             
-                             <li><i class="far fa-folder-open"></i><span class="caret">{{caja.fechaCaja}}</span>
+                             <li><i class="far fa-folder-open"></i><span class="caret">{{caja.fechaCaja.year}}</span>
                                 <ul class="nested">
                                  
-                                 <li><i class="far fa-folder"></i><a href="/proyecto/flujotipo/{{ project.codPyto }}/{{tipo.codTipo}}">{{tipo.detalleTipo}}</a>
+                                 <li><i class="far fa-folder"></i><a href="/proyecto/flujotipo/{{ project.codPyto }}/{{caja.codCaja}}/{{tipo.codTipo}}">{{tipo.detalleTipo}}</a>
                                     <ul class="nested"></ul>  
                                  </li>
                                 
@@ -156,8 +157,8 @@
                           {% endif %}                          
                         {% endfor %}
 
-                            <td class="valor"  >{{ totalV }}</td>
-
+                            <td class="valor"  style="font-weight: bold;" >{{ totalV }}</td>
+                            
                       </tr>
                       <tr class="fila">
                         <td>Cobros a crédito </td>
@@ -167,7 +168,7 @@
                           {% endif %}                          
                         {% endfor %}
                         
-                            <td class="valor"  >{{ totalC }}</td>
+                            <td class="valor"  style="font-weight: bold;">{{ totalC }}</td>
                       </tr>
                       <tr class="fila">
                         <td>Cobros de activos </td>
@@ -177,9 +178,9 @@
                           {% endif %}                          
                         {% endfor %}
                         
-                            <td class="valor"  >{{ totalA }}</td>
+                            <td class="valor"  style="font-weight: bold;">{{ totalA }}</td>
                       </tr>
-                      <tr class="fila">
+                      <tr class="fila" style="font-weight: bold;">
                         <td>Total Ingresos</td>
                         <td class="suma" ></td>
                         <td class="suma" ></td>
@@ -206,7 +207,7 @@
                           {% endif %}                          
                         {% endfor %}
 
-                            <td class="valor1">{{ totalMe }}</td>
+                            <td class="valor1" style="font-weight: bold;">{{ totalMe }}</td>
                       </tr>
                       <tr class="fila1">
                         <td>Pago de impuestos </td>
@@ -216,7 +217,7 @@
                           {% endif %}                          
                         {% endfor %}
 
-                            <td class="valor1">{{ totalIm }}</td>
+                            <td class="valor1" style="font-weight: bold;">{{ totalIm }}</td>
                       </tr>
                       <tr class="fila1">
                         <td>Pago de mantenimiento </td>
@@ -226,7 +227,7 @@
                           {% endif %}                          
                         {% endfor %}
 
-                            <td class="valor1">{{ totalMa }}</td>
+                            <td class="valor1" style="font-weight: bold;">{{ totalMa }}</td>
                       </tr>
                       <tr class="fila1">
                         <td>Pago de publicidad</td>
@@ -236,9 +237,9 @@
                           {% endif %}                          
                         {% endfor %}
 
-                            <td class="valor1">{{ totalPu }}</td>
+                            <td class="valor1" style="font-weight: bold;">{{ totalPu }}</td>
                       </tr>
-                      <tr class="fila1">
+                      <tr class="fila1" style="font-weight: bold;">
                         <td>Total Egresos</td>
                         <td class="suma1"></td>
                         <td class="suma1"></td>
