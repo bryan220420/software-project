@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruta</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/eada1e3dde.js" crossorigin="anonymous"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href={% static 'css/global.css' %}>
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- ----- Starts Sidebar ----- -->
+      <nav id="sidebar">
+        <div class="sidebar--header" id="sidebar-header">
+          <img src={% static 'img/user.png' %} alt="user icon">
+          <p>Quinteros Mauro Danilo</p>
+        </div>
+        <ul class="list-unstyled sidebar--list" id="sidebar-list">
+          <li>
+            <a class="sidebar--item active" href="/proyecto">
+              <i class="fas fa-tasks icon-sidebar"></i>
+              <span class="sidebar--item-text">Proyectos</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- ----- Ends Sidebar ----- -->
+      <!-- ----- Starts Main Content ----- -->
+      <div id="content">
+        <nav class="navbar navbar-expand navbar--collapse">
+          <div class="container-fluid">
+            <button type="button" id="sidebar-btn" class="btn btn-bg">
+              <i class="fa fa-bars"></i>
+            </button>
+          </div>
+        </nav>
+        <div class="content--container">
+          <div class="content--container-bg">
+            <section class="section--container">
+                <h2 class="section--title">.:Proyectos:.</h2>
+                
+                <!-- MIO -->
+                <div class="col-lg-12">
+                  <div class="table-responsive">        
+                      <table id="example" class="table table-bordered table-hover" style="width:100%">
+                      <thead class="thead-dark">
+                          <tr >
+                              <th>Cod.</th>
+                              <th>Denominación Corta</th>
+                              <th>Fecha Reg</th>
+                              <th>Fase</th>
+                              <th>Nivel</th>
+                              <th>Función</th>
+                              <th>Estado</th>
+                              <th>Nombre de Proyecto</th>
+                          </tr>
+                      </thead>
+                      <tbody class="table--body"> 
+                        {% for project in projects %}
+                                
+                              <tr class="table--body" >
+                                
+                                <td class="table--item body"><a href="/proyecto/flujos/{{project.codPyto}}" >{{project.codPyto}} </a> </td>
+                                <td class="table--item body"><a href="/proyecto/flujos/{{project.codPyto}}" >{{project.observac}}}</a></td>
+                                <td class="table--item body"><a href="/proyecto/flujos/{{project.codPyto}}" >{{project.fecReg}}</a></td>
+                                <td class="table--item body"><a href="/proyecto/flujos/{{project.codPyto}}" >
+                                  {% if project.codFase == '2' %}
+                      Pre-Inversion
+                    {% else %}
+                      Inversion
+                    {% endif %}
+                                </a></td>
+                                <td class="table--item body"><a href="/proyecto/flujos/{{project.codPyto}}" >
+                                  {% if project.codNivel == '3' %}
+                                 Perfil
+                                {% else %}
+                                 Perfil
+                                {% endif %}
+                                </a></td>
+                                <td class="table--item body"><a href="/proyecto/flujos/{{project.codPyto}}" >
+                                  {% if project.codFuncion == '2' %}
+                                  Expediente Tecnico
+                                {% else %}
+                                Ejecucción de obra
+                                {% endif %}
+                                </a></td>
+                                <td class="table--item body"><a href="/proyecto/flujos/{{project.codPyto}}" >
+                                  {% if project.vigente == '1' %}
+                      Vigente
+                    {% else %}
+                      No Vigente
+                    {% endif %}
+                                </a></td>
+                                <td class="table--item body"><a href="/proyecto/flujos/{{project.codPyto}}" >{{project.nomPyto}}</a></td>
+                               
+                              </tr>
+                              {% endfor %}
+                       
+                      </tbody>       
+                     </table>                  
+                  </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <!-- ----- Ends Main Content ----- -->
+    </div>
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src={% static 'js/main.js' %}></script>
+  </body>
+</html>

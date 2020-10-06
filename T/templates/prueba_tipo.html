@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flujo Financiero</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+    <!-- Font Awesome -->
+   
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/eada1e3dde.js" crossorigin="anonymous"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href={% static 'css/estilos.css' %}>
+    <link rel="stylesheet" href={% static 'css/global.css' %}>
+   
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- ----- Starts Sidebar ----- -->
+      <nav id="sidebar">
+        <div class="sidebar--header" id="sidebar-header">
+          <img src={% static 'img/user.png' %} alt="user icon">
+          <p>Quinteros Mauro Danilo</p>
+        </div>
+        <ul class="list-unstyled sidebar--list" id="sidebar-list">
+          <li>
+            <a class="sidebar--item" href="/proyecto">
+              <i class="fas fa-tasks icon-sidebar"></i>
+              <span class="sidebar--item-text">Proyectos</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar--item active" href="#">
+              <i class="fas fa-map-marker-alt fa-fw icon-sidebar"></i>
+              <span class="sidebar--item-text">Flujo de Caja</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- ----- Ends Sidebar ------->
+    <!--  <ul id="mi-menu" class="mi-menu">
+        <li title="detalle"><button type="button" class="btn btn-primary btn-bg" data-toggle="modal" data-target="#exampleModal1"
+          id="detalle"><img src={% static 'img/perfiles.png' %} alt="">Detalle</button></li>
+        <li title="editar" ><button type="button" class="btn btn-success boton" id="editar"> <img src={% static 'img/edit.png' %} alt="">Editar</button></li>
+        <li title="Eliminar" ><button type="button" class="btn btn-danger boton" id="delete"><img src={% static 'img/trash.png' %} alt="">Eliminar</button></li>
+       </ul> ------->
+      <!-- ----- Starts Main Content ----- -->
+      <div id="content">
+        <nav class="navbar navbar-expand navbar--collapse">
+          <div class="container-fluid">
+            <button type="button" id="sidebar-btn" class="btn btn-bg">
+              <i class="fa fa-bars"></i>
+            </button>
+          </div>
+        </nav>
+        <div class="content--container">
+          <div class="content--container-bg">
+            <section class="section--container">
+              <div class="project--section">
+                <h2 class="section--title">.:Proyecto:.</h2>
+                <div class="field--container project--container">
+                  <div class="field--item">
+                    <p class="field--item-label">Proyecto</p>
+                    <p class="field--item-value">{{ project.nomPyto }}</p>
+                  </div>
+                  <div class="field--item">
+                    <p class="field--item-label">Cod Fase</p>
+                    <p class="field--item-value text-center">{{project.codFase}}</p>
+                  </div>
+                  <div class="field--item">
+                    <p class="field--item-label">Fecha Reg.</p>
+                    <p class="field--item-value">{{ project.fecReg }}</p>
+                    <i class="far fa-calendar-alt icon"></i>
+                  </div>
+                  <div class="field--item">
+                    <p class="field--item-label">Estado</p>
+                    {% if project.vigente == '1' %}
+                      <p class="field--item-value">Vigente</p>
+                    {% else %}
+                      <p class="field--item-value">No Vigente</p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="section--container row m-0">
+              <div class="col-12 col-md-12 p-0 mb-5">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h2 class="section--title m-0">.:Caja de Flujos:.</h2>
+                </div>
+              </div>
+              <div class="col-3 col-md-3 p-0">
+                <div class="section--container row m-0">
+                  
+                  <ul id="myUL">
+              
+                    <li><i class="far fa-folder-open"></i><span class="caret">{{ project.codPyto }}</span>
+                        <ul class="nested">
+                            
+                             <li><i class="far fa-folder-open"></i><span class="caret">{{caja.fechaCaja}}</span>
+                                <ul class="nested">
+                                 
+                                 <li><i class="far fa-folder"></i><a href="/proyecto/flujotipo/{{ project.codPyto }}/{{tipo.codTipo}}">{{tipo.detalleTipo}}</a>
+                                    <ul class="nested"></ul>  
+                                 </li>
+                                
+                                    <ul class="nested"></ul>  
+                                </li>   
+                                                        
+                           </ul>
+                      </li>   
+                               
+                  </ul>
+            
+                </div>
+              </div>
+              <div class="col-9 col-md-9 p-0"> 
+               
+                <!-- ----- Mauro ----- -->
+                <div class="table-responsive">        
+                  <table id="example" class="table table-bordered table-hover" >
+                    
+                  <thead class="thead-dark">
+                    
+                      <tr>
+                        <th>{{caja.fechaCaja.year}} </th>
+                        <th>ENE</th>
+                        <th>FEB</th>
+                        <th>MAR</th>
+                        <th>ABR</th>
+                        <th>MAY</th>
+                        <th>JUN</th>
+                        <th>JUL</th>
+                        <th>AGOS</th>
+                        <th>SEP</th>
+                        <th>OCT</th>
+                        <th>NOV</th>
+                        <th>DIC</th>
+                        <th>TOTAL</th>
+
+                      </div>                      </thead>
+                  
+                  <tbody class="context">
+                      <tr>
+                        <th> Ingresos</th>
+                      </tr>
+                      <tr>
+                        <th>Ventas en efectivos </th>
+                        <th>ENE</th>
+                        <th>FEB</th>
+                        <th>MAR</th>
+                        <th>ABR</th>
+                        <th>MAY</th>
+                        <th>JUN</th>
+                        <th>JUL</th>
+                        <th>AGOS</th>
+                        <th>SEP</th>
+                        <th>OCT</th>
+                        <th>NOV</th>
+                        <th>DIC</th>
+                        <th>TOTAL</th>
+                      </tr>
+                      <tr>
+                        <th>Ventas en efectivos </th>
+                        <th>ENE</th>
+                        <th>FEB</th>
+                        <th>MAR</th>
+                        <th>ABR</th>
+                        <th>MAY</th>
+                        <th>JUN</th>
+                        <th>JUL</th>
+                        <th>AGOS</th>
+                        <th>SEP</th>
+                        <th>OCT</th>
+                        <th>NOV</th>
+                        <th>DIC</th>
+                        <th>TOTAL</th>
+                      </tr>
+                      <tr>
+                        <th>Ventas en efectivos </th>
+                        <th>ENE</th>
+                        <th>FEB</th>
+                        <th>MAR</th>
+                        <th>ABR</th>
+                        <th>MAY</th>
+                        <th>JUN</th>
+                        <th>JUL</th>
+                        <th>AGOS</th>
+                        <th>SEP</th>
+                        <th>OCT</th>
+                        <th>NOV</th>
+                        <th>DIC</th>
+                        <th>TOTAL</th>
+                      </tr>
+                      <tr>
+                        <th> Egresos</th>
+                      </tr>
+                      <tr>
+                        <th>Ventas en efectivos </th>
+                        <th>ENE</th>
+                        <th>FEB</th>
+                        <th>MAR</th>
+                        <th>ABR</th>
+                        <th>MAY</th>
+                        <th>JUN</th>
+                        <th>JUL</th>
+                        <th>AGOS</th>
+                        <th>SEP</th>
+                        <th>OCT</th>
+                        <th>NOV</th>
+                        <th>DIC</th>
+                        <th>TOTAL</th>
+                      </tr>
+                  </tbody> 
+                  <tfoot></tfoot>       
+                 </table>                  
+              </div>
+            </div>
+                 <!-- ----- Mauro ----- -->
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <!-- ----- Ends Main Content ----- -->
+    </div>
+
+<!-- Modal registrar ruta -->
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src={% static 'js/main.js' %}></script>
+    <script src={% static 'js/util.js' %}></script>
+  </body>
+</html>

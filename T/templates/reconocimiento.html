@@ -1,0 +1,370 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/eada1e3dde.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <link rel="stylesheet" href={% static 'css/global.css' %}>
+</head>
+<body>
+  <div class="wrapper">
+    <nav id="sidebar">
+      <div class="sidebar--header" id="sidebar-header">
+        <img src={% static 'img/user.png' %} alt="user icon">
+        <p>Quinteros Mauro Danilo</p>
+      </div>
+      <ul class="list-unstyled sidebar--list" id="sidebar-list">
+        <li>
+          <a class="sidebar--item " href="/ruta">
+            <i class="fas fa-road fa-fw icon-sidebar"></i>
+            <span class="sidebar--item-text">Preeliminar</span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar--item active" href="/ruta/reconocimiento">
+            <i class="fas fa-map-marker-alt fa-fw icon-sidebar"></i>
+            <span class="sidebar--item-text">Reconocimiento</span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar--item" href="/ruta/topografia">
+            <i class="fas fa-drafting-compass fa-fw icon-sidebar"></i>
+            <span class="sidebar--item-text">Topografía</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="tramificacion" id="content">
+      <nav class="navbar navbar-expand navbar--collapse">
+        <div class="container-fluid">
+          <button type="button" id="sidebar-btn" class="btn btn-bg">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+      <section class="section--container">
+        <div class="navbar--links">
+          <h2 class="section--title">.:Lista de Opciones:.</h2>
+          <div class="option--container">
+            <a href="/ruta" class="btn btn-bg option--item active">
+              Preeliminar
+            </a>
+            <a href="/ruta/reconocimiento" class="btn btn-bg option--item">
+              Reconocimiento
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class=" proyecto section--container">
+        <label for="proyecto">Proyecto</label>
+        <select name="proyecto" id="">
+          <option value="" selected>Elija un proyecto</option>
+        </select>
+        <label for="version">version</label>
+        <input type="text"  value="1"  disabled="true">
+        <label for="fechaRegistro">fecha de Registro</label>
+        <input type="text">
+        <label for="estado">Estado</label>
+        <select name="estado" id="">
+          <option value="" selected>Elija una opcion</option>
+        </select>
+      </section>
+      <div class="main">
+        <div class="seccion1">
+          <ul id="myUL">
+            <li><span class="caret">Ruta -AN-112</span>
+              <ul class="nested">
+                <li><span class="caret"></span>Tramo- Emp. PE 16(Dv. Ocros)</span>
+                    <ul class="nested">
+                        <li>Subtramo-Emp. An 112 - Copa</li>
+                    </ul>
+                </li>
+                <li><span class="caret"></span>Tramo-Cajamarquilla-Emp. PE 16A</span>
+                   <ul class="nested">
+                       <li>Subtramo - Cajamarquilla-Emp. PE 16A</li>
+                   </ul>
+                </li>
+               </ul>
+            </li>
+        </ul>
+        <ul id="myUL">
+            <li><span class="caret">Ruta -AN-1314</span>
+              <ul class="nested">
+                <li><span class="caret"></span>Tramo- Emp. An112- Copa</span>
+                    <ul class="nested">
+                        <li>Subtramo-Emp. An 112 - Copa</li>
+                    </ul>
+                </li>
+                <li><span class="caret"></span>Tramo-Copa-Inicio Lecho de Rio</span>
+                   <ul class="nested">
+                       <li>Subtramo- Copa-Inicio Lecho de Rio</li>
+                   </ul>
+                </li>
+                <li><span class="caret"></span>Tramo-Inicio Lecho de Rios-Fin Lecho de Rios</span>
+                    <ul class="nested">
+                        <li>Subtramo-Emp. An 112 - Copa-Fin Lecho de Rios</li>
+                    </ul>
+                </li>
+                <li><span class="caret"></span>Tramo- Fin Lecho de Rios - Dv.Ruta AN512</span>
+                    <ul class="nested">
+                        <li>Subtramo -Fin de Lecho de Rio - Dv-Ruta</li>
+                    </ul>
+                </li>
+               </ul>
+            </li>
+        </ul>
+        </div>
+        <div class="seccion2">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Ruta</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tramo</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Subtramo</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Procesamiento</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Analisis via</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Tramificacion</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="row tab-item">
+                  <div class="col-2 pad">
+                    <label>Cod.Ruta:</label>
+                    <input class="input" type="text" style="width:40px; " disabled="true" value="001"/>
+                  </div>
+                  <div class="col-3 pad">
+                    <label>Cod.Ruta Py:</label>
+                    <input class="input" type="text" style="width: 100px; "  value="AN-112"/>
+                  </div>
+                  <div class="col-4">
+                    <label>Fecha:</label>
+                    <input class="input" type="date"/>
+                  </div>
+                  <div class="col-3">
+                    <label>Estado:</label>
+                    <select style="width: 100px;">
+                      <option>Vigente</option>
+                      <option>Vigentea</option>
+                      <option>Vigenteb</option>
+                      <option>Vigentec</option>
+                      <option>Vigented</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row tab-item">
+                  <div class="col">
+                    <label>Denominación Ruta:</label>
+                    <textarea class="form-control" rows="4"></textarea>
+                  </div>
+                </div>
+                <div class="row tab-item">
+                  <div class="col-6 pad">
+                    <label>Den. conto:</label>
+                    <input class="input" type="text" style="width: 300px; "  value="Emp. PE 16 hasta Emp. PE 16 A (Dv.Rinconada)"/>
+                  </div>
+                  <div class="col-3 pad">
+                    <label>Zona GPS:</label>
+                    <select style="width: 80px; ">
+                      <option>18</option>
+                      <option>19</option>
+                      <option>20</option>
+                      <option>21</option>
+                      <option>22</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pad">
+                    <label>Long:</label>
+                    <input class="input" type="text" style="width: 65px; " disabled="true" value="128.000"/>
+                    <label>Kms.</label>
+                  </div>
+                </div>
+                <div class="row tab-item">
+                  <div class="col-3">
+                    <label>Prog Inicio:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                  <div class="col-3">
+                    <label>Latitud Inicio:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                  <div class="col-3">
+                    <label>Longitud.Inicio:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                  <div class="col-3">
+                    <label>ALtitud Inicio:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                </div>
+                <div class="row tab-item">
+                  <div class="col-3">
+                    <label>Prog Final:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                  <div class="col-3">
+                    <label>Latitud Final:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                  <div class="col-3">
+                    <label>Longitud.Final:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                  <div class="col-3">
+                    <label>ALtitud Final:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                </div>
+                <div class="row tab-item">
+                  <div class="col">
+                    <label>Observación:</label>
+                    <textarea class="form-control" rows="4"></textarea>
+                  </div>
+                </div>
+                <div class="row tab-item">
+                  <div class="col">
+                    <label>Elaborado por:</label>
+                    <select style="width: 300px; ">
+                      <option>Luis Soto Vargas</option>
+                      <option>19</option>
+                      <option>20</option>
+                      <option>21</option>
+                      <option>22</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="row tab-item">
+                  <div class="col-2">
+                    <label>Cod.Ruta:</label>
+                    <input class="input" type="text" style="width:45px; " disabled="true" value="001"/>
+                  </div>
+                  <div class="col-3">
+                    <label>Cod.Ruta Py:</label>
+                    <input class="input" type="text" style="width: 90px; " disabled="true" value="AN-112"/>
+                  </div>
+                  <div class="col-7">
+                    <label>Den. conto:</label>
+                    <input class="input" type="text" style="width: 450px; " disabled="true" value="Emp. PE 16 hasta Emp. PE 16 A (Dv.Rinconada)"/>
+                  </div>
+                </div>
+                <div class="row tab-item">
+                  <div class="col-2">
+                    <label>Cod.Ruta:</label>
+                    <input class="input" type="text" style="width:45px;" disabled="true" value="001"/>
+                  </div>
+                  <div class="col-3">
+                    <label>Cod.Ruta Py:</label>
+                    <input class="input" type="text" style="width: 100px;" value="AN-112/001"/>
+                  </div>
+                  <div class="col-3">
+                    <label>Fecha:</label>
+                    <input class="input" type="date"/>
+                  </div>
+                  <div class="col-4">
+                    <label>Estado:</label>
+                    <select style="width: 100px;">
+                      <option>Vigente</option>
+                      <option>Vigentea</option>
+                      <option>Vigenteb</option>
+                      <option>Vigentec</option>
+                      <option>Vigented</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row tab-item">
+                  <div class="col">
+                    <label>Denominación Tramo:</label>
+                    <textarea class="form-control" rows="4"></textarea>
+                  </div>
+                </div>
+                <div class="row tab-item">
+                  <div class="col-5">
+                    <label>Cod.Ruta:</label>
+                    <input class="input" type="text" style="width: 300px; "/>
+                  </div>
+                  <div class="col-4">
+                    <label>Zona GPS:</label>
+                    <select style="width: 80px; ">
+                      <option>18</option>
+                      <option>19</option>
+                      <option>20</option>
+                      <option>21</option>
+                      <option>22</option>
+                    </select>
+                  </div>
+                  <div class="col-3">
+                    <label>Long:</label>
+                    <input class="input" type="text" style="width: 60px; " disabled="true" value="53.700"/>
+                    <label>Kms.</label>
+                  </div>
+                </div>
+                <div class="row tab-item">
+                  <div class="col-3">
+                    <label>Prog Inicio:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                  <div class="col-3">
+                    <label>Latitud Inicio:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                  <div class="col-3">
+                    <label>Longitud.Inicio:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                  <div class="col-3">
+                    <label>ALtitud Inicio:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                </div>
+                <div class="row tab-item">
+                  <div class="col-3">
+                    <label>Prog Final:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                  <div class="col-3">
+                    <label>Latitud Final:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                  <div class="col-3">
+                    <label>Longitud.Final:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                  <div class="col-3">
+                    <label>ALtitud Final:</label>
+                    <input class="input" type="text" style="width:115px; "/>
+                  </div>
+                </div>
+                <div class="row tab-item">
+                  <div class="col">
+                    <label>Observación:</label>
+                    <textarea class="form-control" rows="4"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+            </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <script src="{% static 'js/javascript.js' %}"></script>
+</body>
+</html>

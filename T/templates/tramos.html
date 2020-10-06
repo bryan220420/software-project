@@ -1,0 +1,280 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruta</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/eada1e3dde.js" crossorigin="anonymous"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href={% static 'css/global.css' %}>
+    <link rel="stylesheet" href={% static 'css/estilos.css' %}>
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- ----- Starts Sidebar ----- -->
+      <nav id="sidebar">
+        <div class="sidebar--header" id="sidebar-header">
+          <img src={% static 'img/user.png' %} alt="user icon">
+          <p>Quinteros Mauro Danilo</p>
+        </div>
+        <ul class="list-unstyled sidebar--list" id="sidebar-list">
+          <li>
+            <a class="sidebar--item" href="/proyecto">
+              <i class="fas fa-tasks icon-sidebar"></i>
+              <span class="sidebar--item-text">Proyectos</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar--item active" href="#">
+              <i class="fas fa-map-marker-alt fa-fw icon-sidebar"></i>
+              <span class="sidebar--item-text">Reconocimiento</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar--item" href="#">
+              <i class="fas fa-drafting-compass fa-fw icon-sidebar"></i>
+              <span class="sidebar--item-text">Topografía</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- ----- Ends Sidebar ------->
+      <ul id="mi-menu" class="mi-menu">
+        <li title="detalle"><button type="button" class="btn btn-success boton" id="detalle"><img src={% static 'img/perfiles.png' %} alt="">Detalle</button></li>
+        <li title="editar" ><button type="button" class="btn btn-success boton" id="editar"> <img src={% static 'img/edit.png' %} alt="">Editar</button></li>
+        <li title="Eliminar" ><button type="button" class="btn btn-danger boton" id="delete"><img src={% static 'img/trash.png' %} alt="">Eliminar</button></li>
+       </ul>
+      <!-- ----- Starts Main Content ----- -->
+      <div id="content">
+        <nav class="navbar navbar-expand navbar--collapse">
+          <div class="container-fluid">
+            <button type="button" id="sidebar-btn" class="btn btn-bg">
+              <i class="fa fa-bars"></i>
+            </button>
+          </div>
+        </nav>
+        <div class="content--container">
+          <div class="content--container-bg">
+            <section class="section--container">
+              <div class="project--section">
+                <h2 class="section--title">.:Proyecto:.</h2>
+                <div class="field--container project--container">
+                  <div class="field--item">
+                    <p class="field--item-label">Proyecto</p>
+                    <p class="field--item-value">{{ project.nomPyto }}</p>
+                  </div>
+                  <div class="field--item">
+                    <p class="field--item-label">Version</p>
+                    <p class="field--item-value text-center">1</p>
+                  </div>
+                  <div class="field--item">
+                    <p class="field--item-label">Fecha Reg.</p>
+                    <p class="field--item-value">{{ project.fecReg }}</p>
+                    <i class="far fa-calendar-alt icon"></i>
+                  </div>
+                  <div class="field--item">
+                    <p class="field--item-label">Estado</p>
+                    {% if project.vigente == '1' %}
+                      <p class="field--item-value">Vigente</p>
+                    {% else %}
+                      <p class="field--item-value">No Vigente</p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="section--container">
+              <div class="route--section">
+                <h2 class="section--title">.:Ruta:.</h2>
+                <div class="field--container ruta--container">
+                  <div class="field--item">
+                    <p class="field--item-label">Código</p>
+                    <p class="field--item-value">{{ ruta.codRutaPy }}</p>
+                  </div>
+                  <div class="field--item">
+                    <p class="field--item-label">Cód. Ruta Py</p>
+                    <p class="field--item-value">{{ ruta.codRuta }}</p>
+                  </div>
+                  <div class="field--item">
+                    <p class="field--item-label">Den. Corto</p>
+                    <p class="field--item-value">{{ ruta.denominacionRuta }}</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="section--container row m-0">
+              <div class="col-12 col-md-12 p-0 mb-5">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h2 class="section--title m-0">.:Tramos:.</h2>
+                  <button type="button" class="btn btn-bg" id="" data-toggle="modal" data-target="#exampleModal" >Registrar Tramo</button>
+                </div>
+              </div>
+              <div class="col-3 col-md-3 p-0">
+                <section class="tree--container">
+                  <div class="tree--item d-flex justify-content-start align-items-center m-0">
+                    <i class="fas fa-folder-open icon-folder"></i>
+                    <span class="m-0 tree--item-detail">{{ project.nomPyto }}</span>
+                  </div>
+                  <a href="/proyecto/rutas/{{project.codPyto}}" class="tree--item child child-1 d-flex justify-content-start align-items-center m-0">
+                    <i class="fas fa-folder-open icon-folder"></i>
+                    <span class="m-0 tree--item-detail">{{ ruta.codRuta }}</span>
+                  </a>
+                  {% for tramo in tramos %}
+                    <div class="tree--item child child-2 d-flex justify-content-start align-items-center">
+                      <i class="fas fa-folder icon-folder"></i>
+                      <p class="tree--item-detail m-0">{{ tramo.codTramo }}</p>
+                    </div>
+                  {% endfor %}
+                </section>
+              </div>
+              <div class="col-9 col-md-9 p-0" >
+                <div class="table--container m-0">
+                  <div class="table--row  head tramo--row">
+                    <p class="table--item">Código</p>
+                    <p class="table--item">Cod. Tramo</p>
+                    <p class="table--item min-row-width">Nombre del Tramo</p>
+                    <p class="table--item">Prog. Inicial</p>
+                    <p class="table--item">Prog. Final</p>
+                  </div>
+                  <div class="table--body">
+                    {% for tramo in tramos %}
+                      <div class="table--row click-derecho tramo--row body">
+                        <p class="table--item body">{{ tramo.codTramoPy }}</p>
+                        <p class="table--item body">{{ tramo.codTramo }}</p>
+                        <p class="table--item body min-row-width">{{ tramo.denominacionTramo }}</p>
+                        <p class="table--item body">{{ tramo.progInicio }}</p>
+                        <p class="table--item body">{{ tramo.progFin }}</p>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <!-- ----- Ends Main Content ----- -->
+
+      <!-- Modal registrar tramo -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-ingresar">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registrar Tramo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="formulario" id="formulario" method="post" >
+          <div class="row tab-item">
+            <div class="col-2 pad">
+              <label >{{ form.codTramo.label }}</label>
+            {{ form.codTramo }} 
+            </div>
+            <div class="col-4">
+              <label>{{form.fechaRegistro.label}}</label>
+              {{form.fechaRegistro}}
+            </div>
+            <div class="col-3">
+              <label>{{form.vigencia.label}}</label>
+              {{form.vigencia}}
+            </div>
+          </div>
+          <div class="row tab-item">
+            <div class="col">
+              <label>{{form.denominacionRuta.label}}</label>
+              {{form.denominacionRuta}}
+            </div>
+          </div>
+          <div class="row tab-item">
+            <div class="col-6 pad">
+              <label>{{form.denominacionCortoRuta.label}}</label>
+              {{form.denominacionCortoRuta}}
+              
+            </div>
+            <div class="col-3 pad">
+              <label>{{form.zonaGPS.label}}</label>
+              {{form.zonaGPS}}
+             
+            </div>
+            <div class="col-3 pad">
+              <label>{{form.nroKms.label}}</label>
+              {{form.nroKms}}
+              <label>Kms.</label>
+            </div>
+          </div>
+          <div class="row tab-item">
+            <div class="col-3">
+              <label>{{form.progInicio.label}}</label>
+              {{form.progInicio}}
+            
+            </div>
+            <div class="col-3">
+              <label>{{form.latitudInicioRuta.label}}</label>
+              {{form.latitudInicioRuta}}
+             
+            </div>
+            <div class="col-3">
+              <label>{{form.longitudInicioRuta.label}}</label>
+              {{form.longitudInicioRuta}}
+            </div>
+            <div class="col-3">
+              <label>{{form.altitudInicioRuta.label}}</label>
+              {{form.altitudInicioRuta}}
+            </div>
+          </div>
+          <div class="row tab-item">
+            <div class="col-3">
+              <label>{{form.progFinal.label}}</label>
+              {{form.progFinal}}
+            </div>
+            <div class="col-3">
+              <label>{{form.latitudFinalRuta.label}}</label>
+              {{form.latitudFinalRuta}}
+            </div>
+            <div class="col-3">
+              <label>{{form.longitudFinalRuta.label}}</label>
+              {{form.longitudFinalRuta}}
+            </div>
+            <div class="col-3">
+              <label>{{form.altitudFinalRuta.label}}</label>
+              {{form.altitudFinalRuta}}
+            </div>
+          </div>
+          <div class="row tab-item">
+            <div class="col">
+              <label>{{form.observacionRuta.label}}</label>
+              {{form.observacionRuta}}
+            </div>
+          </div>
+          <div class="row tab-item">
+            <div class="col">
+              <label>{{form.elaboradorPor.label}}</label>
+              {{form.elaboradorPor}}
+      
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar Tramo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src={% static 'js/main.js' %}></script>
+    <script src={% static 'js/tramo.js' %}></script>
+  </body>
+</html>

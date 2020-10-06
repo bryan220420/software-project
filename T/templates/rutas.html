@@ -1,0 +1,444 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruta</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/eada1e3dde.js" crossorigin="anonymous"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href={% static 'css/global.css' %}>
+  </head>
+  <body>
+    <div class="wrapper"> 
+      <!-- ----- Starts Sidebar ----- -->
+      <nav id="sidebar">
+        <div class="sidebar--header" id="sidebar-header">
+          <img src={% static 'img/user.png' %} alt="user icon">
+          <p>Quinteros Mauro Danilo</p>
+        </div>
+        <ul class="list-unstyled sidebar--list" id="sidebar-list">
+          <li>
+            <a class="sidebar--item" href="/proyecto">
+              <i class="fas fa-tasks icon-sidebar"></i>
+              <span class="sidebar--item-text">Proyectos</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar--item active" href="#">
+              <i class="fas fa-map-marker-alt fa-fw icon-sidebar"></i>
+              <span class="sidebar--item-text">Reconocimiento</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar--item" href="#">
+              <i class="fas fa-drafting-compass fa-fw icon-sidebar"></i>
+              <span class="sidebar--item-text">Topografía</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- ----- Ends Sidebar ------->
+      <ul id="mi-menu" class="mi-menu">
+        <li title="detalle"><button type="button" class="btn btn-primary btn-bg" data-toggle="modal" data-target="#exampleModal1"
+          id="detalle"><img src={% static 'img/perfiles.png' %} alt="">Detalle</button></li>
+        <li title="editar" ><button type="button" class="btn btn-success boton" id="editar"> <img src={% static 'img/edit.png' %} alt="">Editar</button></li>
+        <li title="Eliminar" ><button type="button" class="btn btn-danger boton" id="delete"><img src={% static 'img/trash.png' %} alt="">Eliminar</button></li>
+       </ul>
+      <!-- ----- Starts Main Content ----- -->
+      <div id="content">
+        <nav class="navbar navbar-expand navbar--collapse">
+          <div class="container-fluid">
+            <button type="button" id="sidebar-btn" class="btn btn-bg">
+              <i class="fa fa-bars"></i>
+            </button>
+          </div>
+        </nav>
+        <div class="content--container">
+          <div class="content--container-bg">
+            <section class="section--container">
+              <div class="project--section">
+                <h2 class="section--title">.:Proyecto:.</h2>
+                <div class="field--container project--container">
+                  <div class="field--item">
+                    <p class="field--item-label">Proyecto</p>
+                    <p class="field--item-value">{{ project.nomPyto }}</p>
+                  </div>
+                  <div class="field--item">
+                    <p class="field--item-label">Version</p>
+                    <p class="field--item-value text-center">1</p>
+                  </div>
+                  <div class="field--item">
+                    <p class="field--item-label">Fecha Reg.</p>
+                    <p class="field--item-value">{{ project.fecReg }}</p>
+                    <i class="far fa-calendar-alt icon"></i>
+                  </div>
+                  <div class="field--item">
+                    <p class="field--item-label">Estado</p>
+                    {% if project.vigente == '1' %}
+                      <p class="field--item-value">Vigente</p>
+                    {% else %}
+                      <p class="field--item-value">No Vigente</p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="section--container row m-0">
+              <div class="col-12 col-md-12 p-0 mb-5">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h2 class="section--title m-0">.:Rutas:.</h2>
+                  <button type="button" class="btn btn-primary btn-bg" data-toggle="modal" data-target="#exampleModal"
+                   id="">Registrar Ruta</button>
+                </div>
+              </div>
+              <div class="col-3 col-md-3 p-0">
+                <section class="tree--container">
+                  <div class="tree--item d-flex justify-content-start align-items-center m-0">
+                    <i class="fas fa-folder-open icon-folder"></i>
+                    <span class="m-0 tree--item-detail">{{ project.nomPyto }}</span>
+                  </div>
+                  {% for ruta in rutas %}
+                    <a href="/proyecto/tramos/{{ruta.codRutaPy}}" class="tree--item child child-1 d-flex justify-content-start align-items-center">
+                      <i class="fas fa-folder icon-folder"></i>
+                      <p class="tree--item-detail m-0">{{ ruta.codRuta }}</p>
+                    </a>
+                  {% endfor %}
+                </section>
+              </div>
+              <div class="col-9 col-md-9 p-0">
+                <div class="table--container m-0">
+                  
+                  <div class="table-responsive ">        
+                    <table id="example" class="table table-bordered table-hover" >
+                    <thead class="thead-dark">
+                        <tr>
+                          <th> </th>
+                          <th>ENE</th>
+                          <th>FEB</th>
+                          <th>MAR</th>
+                          <th>ABR</th>
+                          <th>MAY</th>
+                          <th>JUN</th>
+                          <th>JUL</th>
+                          <th>AGOS</th>
+                          <th>SEP</th>
+                          <th>OCT</th>
+                          <th>NOV</th>
+                          <th>DIC</th>
+                          <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody class="context">
+                        <tr>
+                          <th> Ingresos</th>
+                        </tr>
+                        <tr>
+                          <th>Ventas en efectivos </th>
+                          <th>ENE</th>
+                          <th>FEB</th>
+                          <th>MAR</th>
+                          <th>ABR</th>
+                          <th>MAY</th>
+                          <th>JUN</th>
+                          <th>JUL</th>
+                          <th>AGOS</th>
+                          <th>SEP</th>
+                          <th>OCT</th>
+                          <th>NOV</th>
+                          <th>DIC</th>
+                          <th>TOTAL</th>
+                        </tr>
+                        <tr>
+                          <th>Ventas en efectivos </th>
+                          <th>ENE</th>
+                          <th>FEB</th>
+                          <th>MAR</th>
+                          <th>ABR</th>
+                          <th>MAY</th>
+                          <th>JUN</th>
+                          <th>JUL</th>
+                          <th>AGOS</th>
+                          <th>SEP</th>
+                          <th>OCT</th>
+                          <th>NOV</th>
+                          <th>DIC</th>
+                          <th>TOTAL</th>
+                        </tr>
+                        <tr>
+                          <th>Ventas en efectivos </th>
+                          <th>ENE</th>
+                          <th>FEB</th>
+                          <th>MAR</th>
+                          <th>ABR</th>
+                          <th>MAY</th>
+                          <th>JUN</th>
+                          <th>JUL</th>
+                          <th>AGOS</th>
+                          <th>SEP</th>
+                          <th>OCT</th>
+                          <th>NOV</th>
+                          <th>DIC</th>
+                          <th>TOTAL</th>
+                        </tr>
+                        <tr>
+                          <th>Ventas en efectivos </th>
+                          <th>ENE</th>
+                          <th>FEB</th>
+                          <th>MAR</th>
+                          <th>ABR</th>
+                          <th>MAY</th>
+                          <th>JUN</th>
+                          <th>JUL</th>
+                          <th>AGOS</th>
+                          <th>SEP</th>
+                          <th>OCT</th>
+                          <th>NOV</th>
+                          <th>DIC</th>
+                          <th>TOTAL</th>
+                        </tr>
+                        <tr>
+                          <th> Ingresos</th>
+                        </tr>
+                        <tr>
+                          <th>Ventas en efectivos </th>
+                          <th>ENE</th>
+                          <th>FEB</th>
+                          <th>MAR</th>
+                          <th>ABR</th>
+                          <th>MAY</th>
+                          <th>JUN</th>
+                          <th>JUL</th>
+                          <th>AGOS</th>
+                          <th>SEP</th>
+                          <th>OCT</th>
+                          <th>NOV</th>
+                          <th>DIC</th>
+                          <th>TOTAL</th>
+                        </tr>
+                        <tr>
+                          <th>Ventas en efectivos </th>
+                          <th>ENE</th>
+                          <th>FEB</th>
+                          <th>MAR</th>
+                          <th>ABR</th>
+                          <th>MAY</th>
+                          <th>JUN</th>
+                          <th>JUL</th>
+                          <th>AGOS</th>
+                          <th>SEP</th>
+                          <th>OCT</th>
+                          <th>NOV</th>
+                          <th>DIC</th>
+                          <th>TOTAL</th>
+                        </tr>
+                        <tr>
+                          <th>Ventas en efectivos </th>
+                          <th>ENE</th>
+                          <th>FEB</th>
+                          <th>MAR</th>
+                          <th>ABR</th>
+                          <th>MAY</th>
+                          <th>JUN</th>
+                          <th>JUL</th>
+                          <th>AGOS</th>
+                          <th>SEP</th>
+                          <th>OCT</th>
+                          <th>NOV</th>
+                          <th>DIC</th>
+                          <th>TOTAL</th>
+                        </tr>
+                        <tr>
+                          <th>Ventas en efectivos </th>
+                          <th>ENE</th>
+                          <th>FEB</th>
+                          <th>MAR</th>
+                          <th>ABR</th>
+                          <th>MAY</th>
+                          <th>JUN</th>
+                          <th>JUL</th>
+                          <th>AGOS</th>
+                          <th>SEP</th>
+                          <th>OCT</th>
+                          <th>NOV</th>
+                          <th>DIC</th>
+                          <th>TOTAL</th>
+                        </tr>
+                    </tbody>        
+                   </table>                  
+                </div>
+
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <!-- ----- Ends Main Content ----- -->
+    </div>
+    <form action="">
+      
+    </form>
+
+
+<!-- Modal registrar ruta -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-ingresar">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registrar Flujo </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="formulario" id="formulario" method="post" >
+            {{ form.as_p }}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar Ruta</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal detalle ruta -->
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-ingresar">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalle Ruta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="formulario" id="formulario">
+          <div class="row tab-item">
+            <div class="col-2 pad">
+              <label>Cod.Ruta:</label>
+              <input class="input" type="text" style="width:40px; " name="codRuta"  value="001"/>
+            </div>
+            <div class="col-3 pad">
+              <label>Cod.Ruta Py:</label>
+              <input class="input" type="text" style="width: 100px; " name="codRutaPy" disabled="true"  value="AN-112"/>
+            </div>
+            <div class="col-4">
+              <label>Fecha:</label>
+              <input class="input" type="date" name="fechaRegistro"/>
+            </div>
+            <div class="col-3">
+              <label>Estado:</label>
+              <select style="width: 100px;" name="vigencia">
+                <option>Vigente</option>
+                <option>Vigentea</option>
+                <option>Vigenteb</option>
+                <option>Vigentec</option>
+                <option>Vigented</option>
+              </select>
+            </div>
+          </div>
+          <div class="row tab-item">
+            <div class="col">
+              <label>Denominación Ruta:</label>
+              <textarea class="form-control" name="denominacionRuta" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="row tab-item">
+            <div class="col-6 pad">
+              <label>Den. conto:</label>
+              <input class="input" type="text" style="width: 300px; " name="denominacionCortoRuta" value="Emp. PE 16 hasta Emp. PE 16 A (Dv.Rinconada)"/>
+            </div>
+            <div class="col-3 pad">
+              <label>Zona GPS:</label>
+              <select style="width: 80px; " name="zonaGPS">
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+              </select>
+            </div>
+            <div class="col-3 pad">
+              <label>Long:</label>
+              <input class="input" type="text" style="width: 65px; " name="nroKms" disabled="true" value="128.000"/>
+              <label>Kms.</label>
+            </div>
+          </div>
+          <div class="row tab-item">
+            <div class="col-3">
+              <label>Prog Inicio:</label>
+              <input class="input" type="text" style="width:115px; " name="progInicio"/>
+            </div>
+            <div class="col-3">
+              <label>Latitud Inicio:</label>
+              <input class="input" type="text" style="width:115px; "name="latitudInicioRuta"/>
+            </div>
+            <div class="col-3">
+              <label>Longitud.Inicio:</label>
+              <input class="input" type="text" style="width:115px; "name="longitudInicioRuta"/>
+            </div>
+            <div class="col-3">
+              <label>ALtitud Inicio:</label>
+              <input class="input" type="text" style="width:115px; "name="altitudInicioRuta"/>
+            </div>
+          </div>
+          <div class="row tab-item">
+            <div class="col-3">
+              <label>Prog Final:</label>
+              <input class="input" type="text" style="width:115px; "name="progFinal"/>
+            </div>
+            <div class="col-3">
+              <label>Latitud Final:</label>
+              <input class="input" type="text" style="width:115px; "name="latitudFinalRuta"/>
+            </div>
+            <div class="col-3">
+              <label>Longitud.Final:</label>
+              <input class="input" type="text" style="width:115px; "name="longitudFinalRuta"/>
+            </div>
+            <div class="col-3">
+              <label>ALtitud Final:</label>
+              <input class="input" type="text" style="width:115px; "name="altitudFinalRuta"/>
+            </div>
+          </div>
+          <div class="row tab-item">
+            <div class="col">
+              <label>Observación:</label>
+              <textarea class="form-control" rows="4" name="observacionRuta"></textarea>
+            </div>
+          </div>
+          <div class="row tab-item">
+            <div class="col">
+              <label>Elaborado por:</label>
+              <select style="width: 300px; " name="progInicio">
+                <option>Luis Soto Vargas</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src={% static 'js/main.js' %}></script>
+    <script src={% static 'js/util.js' %}></script>
+  </body>
+</html>

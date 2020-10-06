@@ -1,0 +1,93 @@
+
+.proyecto {
+
+  border-radius: 3px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+#content {
+  width: auto;
+  padding: 0 1rem;
+  min-height: 100vh;
+  transition: var(--transition);
+  margin-left: var(--sidebar-width);
+}
+#sidebar.hidden ~ #content {
+  margin-left: var(--sidebar-hidden-width);
+}
+
+.main {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.seccion1 {
+  width: 290px;
+  background-color:#ffffff;
+}
+.seccion2 {
+  margin-left: 20px;
+  width: 100%;
+  background-color:#ffffff;
+
+}
+
+.tab-content {
+  padding: 5px;
+}
+
+.tab-item {
+  margin-bottom: 2.5px;
+}
+
+.pad {
+  padding: 0 !important;
+}
+
+ul,
+#myUL {
+  list-style-type: none;
+}
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+.caret {
+  cursor: pointer;
+  user-select: none;
+}
+.caret::before {
+  /*content: "\25B6";*/
+  background: white;
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  transform: rotate(90deg);
+}
+.nested {
+  display: none;
+}
+
+.seccion1 {
+  
+  height: 100%;
+  width: 30%;
+ 
+}
+.active {
+  display: block;
+  
+}
+i{
+  margin-right: 5px;
+  color: green;
+}
+.table-responsive{
+  overflow-y: scroll;
+  width: 100%;
+  height: 400px !important;
+ }
