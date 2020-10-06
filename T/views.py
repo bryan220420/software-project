@@ -32,7 +32,9 @@ def get_ingresos(codCaja):
   ingresos = Ingreso.objects.filter(codCaja=codCaja)
   return ingresos
 
-
+def get_egresos(codCaja):
+  egresos = Egreso.objects.filter(codCaja=codCaja)
+  return egresos
 
 def get_ruta(codRuta):
   ruta = Ruta.objects.filter(codRutaPy=codRuta).values()
@@ -75,16 +77,42 @@ def flujos(request, cod_project):
 def flujotipo(request,cod_project,cod_caja,cod_tipo):
   caja = get_caja(cod_caja)
   ingresos= get_ingresos(cod_caja)
-  ventas_credito = []
+  totalV=0
+  totalC=0
+  totalA=0
+  egresos= get_egresos(cod_caja)
+  totalMe=0
+  totalIm=0
+  totalMa=0
+  totalPu=0
+
   for ingreso in ingresos:
+    if ingreso.detalleIng=="Ventas en Efectivo":
+      totalV+=ingreso.monto
+    if ingreso.detalleIng=="Cobros a crédito":
+      totalC+=ingreso.monto
+    if ingreso.detalleIng=="cobros de activos":
+      totalA+=ingreso.monto
     
     print(ingreso.fechaIng)
-    ventas_credito.append(ingreso)
 
-    
+
+  for egreso in egresos:
+    if egreso.detalleEgr=="CompraMercancia":
+      totalMe+=egreso.monto
+    if egreso.detalleEgr=="PagosImpuestos":
+      totalIm+=egreso.monto
+    if egreso.detalleEgr=="PagoMantenimiento":
+      totalMa+=egreso.monto
+    if egreso.detalleEgr=="PagoPublicidad":
+      totalPu+=egreso.monto
+
+    print(egreso.fechaEgr)
+
+
   tipo = get_tipo(cod_tipo)
   project = get_project(cod_project)
-  return render(request, 'prueba_tipo.html', {'project': project, 'caja': caja,'tipo':tipo})
+  return render(request, 'prueba_tipo.html', {'project': project, 'caja': caja,'tipo':tipo, 'ingresos':ingresos,'totalV':totalV,'totalC':totalC,'totalA':totalA,'egresos':egresos,'totalMe':totalMe,'totalIm':totalIm,'totalMa':totalMa,'totalPu':totalPu})
 
 def crearRuta(request):
   form=Rutaform()

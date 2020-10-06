@@ -95,7 +95,7 @@
               </div>
               <div class="col-3 col-md-3 p-0">
                 <div class="section--container row m-0">
-                  
+          <!-- ----- Triii ----- -->        
                   <ul id="myUL">
               
                     <li><i class="far fa-folder-open"></i><span class="caret">{{ project.codPyto }}</span>
@@ -122,98 +122,137 @@
                
                 <!-- ----- Mauro ----- -->
                 <div class="table-responsive">        
-                  <table id="example" class="table table-bordered table-hover" >
+                  <table id="tabla" class="table table-bordered table-hover" >
                     
                   <thead class="thead-dark">
                     
                       <tr>
                         <th>{{caja.fechaCaja.year}} </th>
-                        <th>ENE</th>
-                        <th>FEB</th>
-                        <th>MAR</th>
-                        <th>ABR</th>
-                        <th>MAY</th>
-                        <th>JUN</th>
-                        <th>JUL</th>
-                        <th>AGOS</th>
-                        <th>SEP</th>
-                        <th>OCT</th>
-                        <th>NOV</th>
-                        <th>DIC</th>
-                        <th>TOTAL</th>
+                        <th class="columna" >ENE</th>
+                        <th class="columna" >FEB</th>
+                        <th class="columna" >MAR</th>
+                        <th class="columna" >ABR</th>
+                        <th class="columna" >MAY</th>
+                        <th class="columna" >JUN</th>
+                        <th class="columna" >JUL</th>
+                        <th class="columna" >AGOS</th>
+                        <th class="columna" >SEP</th>
+                        <th class="columna" >OCT</th>
+                        <th class="columna" >NOV</th>
+                        <th class="columna" >DIC</th>
+                        <th class="columna" >TOTAL</th>
 
                       </div>                      </thead>
                   
                   <tbody class="context">
                       <tr>
-                        <th> Ingresos</th>
+                        <td> Ingresos</td>
+                      </tr>
+                      <tr class="fila">
+                        <td>Ventas en efectivos </td>
+                        {% for ingreso in ingresos %}
+                          {% if ingreso.detalleIng == "Ventas en Efectivo" %}                                                          
+                            <td class="valor"  >{{ingreso.monto}}</td>      
+                          {% endif %}                          
+                        {% endfor %}
+
+                            <td class="valor"  >{{ totalV }}</td>
+
+                      </tr>
+                      <tr class="fila">
+                        <td>Cobros a crédito </td>
+                        {% for ingreso in ingresos %}
+                          {% if ingreso.detalleIng == "Cobros a crédito" %}                                                          
+                            <td class="valor"  >{{ingreso.monto}}</td>      
+                          {% endif %}                          
+                        {% endfor %}
+                        
+                            <td class="valor"  >{{ totalC }}</td>
+                      </tr>
+                      <tr class="fila">
+                        <td>Cobros de activos </td>
+                        {% for ingreso in ingresos %}
+                          {% if ingreso.detalleIng == "cobros de activos" %}                                                          
+                            <td class="valor"  >{{ingreso.monto}}</td>      
+                          {% endif %}                          
+                        {% endfor %}
+                        
+                            <td class="valor"  >{{ totalA }}</td>
+                      </tr>
+                      <tr class="fila">
+                        <td>Total Ingresos</td>
+                        <td class="suma" ></td>
+                        <td class="suma" ></td>
+                        <td class="suma" ></td>
+                        <td class="suma" ></td>
+                        <td class="suma" ></td>
+                        <td class="suma" ></td>
+                        <td class="suma" ></td>
+                        <td class="suma" ></td>
+                        <td class="suma" ></td>
+                        <td class="suma" ></td>
+                        <td class="suma" ></td>
+                        <td class="suma" ></td>
+                        <td class="suma" ></td>
                       </tr>
                       <tr>
-                        <th>Ventas en efectivos </th>
-                        <th>ENE</th>
-                        <th>FEB</th>
-                        <th>MAR</th>
-                        <th>ABR</th>
-                        <th>MAY</th>
-                        <th>JUN</th>
-                        <th>JUL</th>
-                        <th>AGOS</th>
-                        <th>SEP</th>
-                        <th>OCT</th>
-                        <th>NOV</th>
-                        <th>DIC</th>
-                        <th>TOTAL</th>
+                        <td> Egresos</td>
                       </tr>
-                      <tr>
-                        <th>Ventas en efectivos </th>
-                        <th>ENE</th>
-                        <th>FEB</th>
-                        <th>MAR</th>
-                        <th>ABR</th>
-                        <th>MAY</th>
-                        <th>JUN</th>
-                        <th>JUL</th>
-                        <th>AGOS</th>
-                        <th>SEP</th>
-                        <th>OCT</th>
-                        <th>NOV</th>
-                        <th>DIC</th>
-                        <th>TOTAL</th>
+                      <tr class="fila1" >
+                        <td >Compra de mercancía </td>
+                        {% for egreso in egresos %}
+                          {% if egreso.detalleEgr == "CompraMercancia" %}                                                          
+                            <td class="valor1">{{egreso.monto}}</td>      
+                          {% endif %}                          
+                        {% endfor %}
+
+                            <td class="valor1">{{ totalMe }}</td>
                       </tr>
-                      <tr>
-                        <th>Ventas en efectivos </th>
-                        <th>ENE</th>
-                        <th>FEB</th>
-                        <th>MAR</th>
-                        <th>ABR</th>
-                        <th>MAY</th>
-                        <th>JUN</th>
-                        <th>JUL</th>
-                        <th>AGOS</th>
-                        <th>SEP</th>
-                        <th>OCT</th>
-                        <th>NOV</th>
-                        <th>DIC</th>
-                        <th>TOTAL</th>
+                      <tr class="fila1">
+                        <td>Pago de impuestos </td>
+                        {% for egreso in egresos %}
+                          {% if egreso.detalleEgr == "PagosImpuestos" %}                                                          
+                            <td class="valor1">{{egreso.monto}}</td>      
+                          {% endif %}                          
+                        {% endfor %}
+
+                            <td class="valor1">{{ totalIm }}</td>
                       </tr>
-                      <tr>
-                        <th> Egresos</th>
+                      <tr class="fila1">
+                        <td>Pago de mantenimiento </td>
+                        {% for egreso in egresos %}
+                          {% if egreso.detalleEgr == "PagoMantenimiento" %}                                                          
+                            <td class="valor1">{{egreso.monto}}</td>      
+                          {% endif %}                          
+                        {% endfor %}
+
+                            <td class="valor1">{{ totalMa }}</td>
                       </tr>
-                      <tr>
-                        <th>Ventas en efectivos </th>
-                        <th>ENE</th>
-                        <th>FEB</th>
-                        <th>MAR</th>
-                        <th>ABR</th>
-                        <th>MAY</th>
-                        <th>JUN</th>
-                        <th>JUL</th>
-                        <th>AGOS</th>
-                        <th>SEP</th>
-                        <th>OCT</th>
-                        <th>NOV</th>
-                        <th>DIC</th>
-                        <th>TOTAL</th>
+                      <tr class="fila1">
+                        <td>Pago de publicidad</td>
+                        {% for egreso in egresos %}
+                          {% if egreso.detalleEgr == "PagoPublicidad" %}                                                          
+                            <td class="valor1">{{egreso.monto}}</td>      
+                          {% endif %}                          
+                        {% endfor %}
+
+                            <td class="valor1">{{ totalPu }}</td>
+                      </tr>
+                      <tr class="fila1">
+                        <td>Total Egresos</td>
+                        <td class="suma1"></td>
+                        <td class="suma1"></td>
+                        <td class="suma1"></td>
+                        <td class="suma1"></td>
+                        <td class="suma1"></td>
+                        <td class="suma1"></td>
+                        <td class="suma1"></td>
+                        <td class="suma1"></td>
+                        <td class="suma1"></td>
+                        <td class="suma1"></td>
+                        <td class="suma1"></td>
+                        <td class="suma1"></td>
+                        <td class="suma1"></td>
                       </tr>
                   </tbody> 
                   <tfoot></tfoot>       
